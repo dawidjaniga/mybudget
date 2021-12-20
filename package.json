@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "nx build",
     "test": "nx test"
   },
   "private": true,
   "dependencies": {
     "express": "4.17.1",
+    "pm2": "^5.1.2",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
