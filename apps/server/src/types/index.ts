@@ -6,7 +6,7 @@ export type CurrencyCode = 'PLN' | 'USD' | 'EUR' | 'GBP' | 'CHF'
 
 export type Wallet = {
   id: string
-  balance: string
+  balance: Money
   currency: CurrencyCode
 }
 

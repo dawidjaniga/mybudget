@@ -7,7 +7,7 @@ import income from './income'
 
 export default function MyBudget (apiKey: string) {
   // const apiClient1 = ky.create({
-  //   prefixUrl: 'https://example.com/api',
+  //   prefixUrl: process.env.API_URL,
   //   headers: {
   //     'content-type': 'application/json',
   //     'x-api-key': apiKey
