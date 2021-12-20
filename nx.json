@@ -27,6 +27,9 @@
     ]
   },
   "projects": {
+    "client": {
+      "tags": []
+    },
     "server": {
       "tags": []
     }
