@@ -10,6 +10,9 @@
   "private": true,
   "dependencies": {
     "express": "4.17.1",
+    "ky": "^0.28.7",
+    "ky-universal": "^0.9.1",
+    "mongoose": "^6.1.2",
     "pm2": "^5.1.2",
     "tslib": "^2.0.0"
   },
