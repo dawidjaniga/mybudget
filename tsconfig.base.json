@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "mybudget": ["libs/client-npm/src/index.ts"]
+      "@mybudget/client": ["libs/client/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

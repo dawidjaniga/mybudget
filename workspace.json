@@ -1,34 +1,34 @@
 {
   "version": 2,
   "projects": {
-    "client-npm": {
-      "root": "libs/client-npm",
-      "sourceRoot": "libs/client-npm/src",
+    "client": {
+      "root": "libs/client",
+      "sourceRoot": "libs/client/src",
       "projectType": "library",
       "targets": {
         "build": {
           "executor": "@nrwl/node:package",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/libs/client-npm",
-            "tsConfig": "libs/client-npm/tsconfig.lib.json",
-            "packageJson": "libs/client-npm/package.json",
-            "main": "libs/client-npm/src/index.ts",
-            "assets": ["libs/client-npm/*.md"]
+            "outputPath": "dist/libs/client",
+            "tsConfig": "libs/client/tsconfig.lib.json",
+            "packageJson": "libs/client/package.json",
+            "main": "libs/client/src/index.ts",
+            "assets": ["libs/client/*.md"]
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/client-npm/**/*.ts"]
+            "lintFilePatterns": ["libs/client/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/client-npm"],
+          "outputs": ["coverage/libs/client"],
           "options": {
-            "jestConfig": "libs/client-npm/jest.config.js",
+            "jestConfig": "libs/client/jest.config.js",
             "passWithNoTests": true
           }
         }

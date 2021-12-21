@@ -27,7 +27,7 @@
     ]
   },
   "projects": {
-    "client-npm": {
+    "client": {
       "tags": []
     },
     "server": {
