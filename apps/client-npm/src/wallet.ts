@@ -1,4 +1,4 @@
-import { CurrencyCode, Money, Wallet } from './../../server/src/types/index'
+import { CurrencyCode, Money, Wallet } from '../../server/src/types/index'
 import { KyInstance } from 'ky/distribution/types/ky'
 
 export type CreateWalletOptions = {

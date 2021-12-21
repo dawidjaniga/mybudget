@@ -30,6 +30,9 @@
     "client": {
       "tags": []
     },
+    "client-npm": {
+      "tags": []
+    },
     "server": {
       "tags": []
     }
