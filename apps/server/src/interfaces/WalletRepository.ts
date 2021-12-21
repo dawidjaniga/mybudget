@@ -1,4 +1,4 @@
-import { User, CurrencyCode, Wallet } from '../types'
+import { User, CurrencyCode, Wallet } from '@mybudget/types'
 
 export type CreateOptions = {
   user?: User

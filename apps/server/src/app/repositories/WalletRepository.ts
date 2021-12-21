@@ -3,7 +3,7 @@ import {
   IWalletRepository
 } from './../../interfaces/WalletRepository'
 
-import { Wallet, Money } from '../../types'
+import { Wallet, Money } from '@mybudget/types'
 const mongoose = require('mongoose')
 
 const uri = process.env.MONGODB_URI

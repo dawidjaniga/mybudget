@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@mybudget/types": ["libs/types/src/index.ts"],
       "mybudget": ["libs/client/src/index.ts"]
     }
   },
