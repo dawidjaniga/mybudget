@@ -47,10 +47,10 @@ router.get('/', async function incomesGetHandler(req, res) {
 });
 
 /**
- * Create expense
+ * Create income
  * POST /
  */
-const createIncomechema = yup.object().shape({
+const createIncomeSchema = yup.object().shape({
   walletId: yup.string().required(),
   categoryId: yup.string().required(),
   amount: yup.number().integer().positive().required(),
@@ -59,7 +59,7 @@ const createIncomechema = yup.object().shape({
 
 router.post('/', async function incomesPostHandler(req, res) {
   try {
-    /** const validPayload = */ await createIncomechema.validate(req.body)
+    /** const validPayload = */ await createIncomeSchema.validate(req.body)
 
     /**
      * @todo
