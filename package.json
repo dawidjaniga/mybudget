@@ -5,6 +5,7 @@
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "nx build",
+    "client:publish": "cd dist/libs/client && npm publish",
     "test": "nx test"
   },
   "private": true,
@@ -21,6 +22,7 @@
     "@nrwl/eslint-plugin-nx": "13.3.12",
     "@nrwl/express": "13.3.12",
     "@nrwl/jest": "13.3.12",
+    "@nrwl/js": "13.3.12",
     "@nrwl/linter": "13.3.12",
     "@nrwl/node": "13.3.12",
     "@nrwl/tao": "13.3.12",

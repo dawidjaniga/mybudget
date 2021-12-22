@@ -1,4 +1,4 @@
-import { CurrencyCode, Money, Wallet } from '@mybudget/types'
+import { CurrencyCode, Money, Wallet } from './types'
 
 import { KyInstance } from 'ky/distribution/types/ky'
 
