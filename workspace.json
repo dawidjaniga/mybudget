@@ -106,9 +106,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/express"
-  },
-  "defaultProject": "server"
+  }
 }
