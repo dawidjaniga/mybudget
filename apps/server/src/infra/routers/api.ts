@@ -6,6 +6,7 @@ import incomes from './incomes'
 import incomeCategories from './incomeCategories'
 import expenses from './expenses'
 import expenseCategories from './expenseCategories'
+import dashboard from './dashboard'
 
 const router = Router()
 
@@ -15,7 +16,7 @@ const router = Router()
  * - /wallets
  * - /incomes
  * - /expences
- * - /dashboards
+ * - /dashboard
  */
 
 router.use(bodyParser.json())
@@ -25,5 +26,11 @@ router.use('/incomes', incomes)
 router.use('/income-categories', incomeCategories)
 router.use('/expenses', expenses)
 router.use('/expense-categories', expenseCategories)
+
+/**
+ * We use singular name for dashboard as we will 
+ * have only 1 read-only dashboard model per user
+ */
+router.use('/dashboard', dashboard)
 
 export default router
