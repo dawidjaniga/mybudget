@@ -2,6 +2,7 @@ import { Router } from 'express'
 import * as bodyParser from 'body-parser';
 
 import wallets from './wallets'
+import incomes from './incomes'
 
 const router = Router()
 
@@ -17,5 +18,6 @@ const router = Router()
 router.use(bodyParser.json())
 
 router.use('/wallets', wallets)
+router.use('/incomes', incomes)
 
 export default router
