@@ -22,8 +22,8 @@ router.use(bodyParser.json())
 
 router.use('/wallets', wallets)
 router.use('/incomes', incomes)
-router.use('/incomes', incomeCategories)
-router.use('/expense-categories', expenses)
+router.use('/income-categories', incomeCategories)
+router.use('/expenses', expenses)
 router.use('/expense-categories', expenseCategories)
 
 export default router
