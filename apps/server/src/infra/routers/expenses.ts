@@ -2,48 +2,48 @@ import { Router } from 'express'
 import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 import * as yup from 'yup'
 
-import { Income, Money } from '@mybudget/types'
+import { Expense, Money } from '@mybudget/types'
 
 /**
- * /api/incomes
+ * /api/expenses
  */
 const router = Router()
 
 /**
- * Get incomes
+ * Get expenses
  * GET /
  */
-router.get('/', async function incomesGetHandler(req, res) {
+router.get('/', async function expensesGetHandler(req, res) {
   /**
    * @todo 
-   * Fetch real incomes for the authorized user
+   * Fetch real expenses for the authorized user
    */
 
-  const incomes: Income[] = [
+  const expenses: Expense[] = [
     {
-      id: 'income-1-a',
+      id: 'expense-1-a',
       walletId: 'wallet-1-a',
-      categoryId: 'income-category-1-a',
+      categoryId: 'expense-category-1-a',
       amount: 100 as Money,
       transactionDate: new Date(),
     },
     {
-      id: 'income-2-b',
+      id: 'expense-2-b',
       walletId: 'wallet-1-a',
-      categoryId: 'income-category-2-b',
+      categoryId: 'expense-category-2-b',
       amount: 200 as Money,
       transactionDate: new Date(),
     },
     {
-      id: 'income-3-c',
+      id: 'expense-3-c',
       walletId: 'wallet-2-b',
-      categoryId: 'income-category-1-a',
+      categoryId: 'expense-category-1-a',
       amount: 300 as Money,
       transactionDate: new Date(),
     },
   ];
 
-  return res.json({ data: incomes })
+  return res.json({ data: expenses })
 });
 
 /**
@@ -57,7 +57,7 @@ const createIncomechema = yup.object().shape({
   transactionDate: yup.date().optional().default(() => new Date())
 })
 
-router.post('/', async function incomesPostHandler(req, res) {
+router.post('/', async function expensesPostHandler(req, res) {
   try {
     /** const validPayload = */ await createIncomechema.validate(req.body)
 
