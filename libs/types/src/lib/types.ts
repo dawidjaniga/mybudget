@@ -25,7 +25,7 @@ export type Income = {
 
 export type IncomeCategory = {
   id: string
-  parentId: string
+  parentId?: string
   name: string
 }
 
@@ -39,7 +39,7 @@ export type Expense = {
 
 export type ExpenseCategory = {
   id: string
-  parentId: string
+  parentId?: string
   name: string
 }
 

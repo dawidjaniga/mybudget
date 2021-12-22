@@ -3,7 +3,9 @@ import * as bodyParser from 'body-parser';
 
 import wallets from './wallets'
 import incomes from './incomes'
+import incomeCategories from './incomeCategories'
 import expenses from './expenses'
+import expenseCategories from './expenseCategories'
 
 const router = Router()
 
@@ -20,6 +22,8 @@ router.use(bodyParser.json())
 
 router.use('/wallets', wallets)
 router.use('/incomes', incomes)
-router.use('/expenses', expenses)
+router.use('/incomes', incomeCategories)
+router.use('/expense-categories', expenses)
+router.use('/expense-categories', expenseCategories)
 
 export default router

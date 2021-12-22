@@ -50,7 +50,7 @@ router.get('/', async function expensesGetHandler(req, res) {
  * Create expense
  * POST /
  */
-const createIncomechema = yup.object().shape({
+const createExpenseSchema = yup.object().shape({
   walletId: yup.string().required(),
   categoryId: yup.string().required(),
   amount: yup.number().integer().positive().required(),
@@ -59,12 +59,12 @@ const createIncomechema = yup.object().shape({
 
 router.post('/', async function expensesPostHandler(req, res) {
   try {
-    /** const validPayload = */ await createIncomechema.validate(req.body)
+    /** const validPayload = */ await createExpenseSchema.validate(req.body)
 
     /**
      * @todo
      * Here payload is valid
-     * We can safely create a new income
+     * We can safely create a new expense
      * based on validPayload value
      */
 
