@@ -29,6 +29,19 @@ export default function wallet (apiClient: AxiosInstance) {
 
         console.error('Unknown error')
       }
+    },
+    list: async (): Promise<Wallet[] | Error> => {
+      try {
+        const response = await apiClient.get<Wallet[]>(url)
+
+        return response.data
+      } catch (e) {
+        if (e instanceof Error) {
+          return e
+        }
+
+        console.error('Unknown error')
+      }
     }
   }
 }
