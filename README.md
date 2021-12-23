@@ -13,7 +13,7 @@ npm install mybudget
 import MyBudget from 'mybudget'
 
 const myBudgetApiKey = 'xyz-...-123'
-const mb = new MyBudget(myBudgetApiKey)
+const mb = MyBudget(myBudgetApiKey)
 
 async function addIncome() {
     try {

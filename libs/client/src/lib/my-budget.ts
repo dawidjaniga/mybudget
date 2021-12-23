@@ -1,7 +1,7 @@
 import ky from 'ky-universal'
 import wallet from './wallet'
 
-export default function MyBudget () {
+export function MyBudget () {
   const apiClient = ky.create({
     prefixUrl: process.env.API_URL,
     headers: {
