@@ -1,8 +1,10 @@
-import * as express from 'express'
+import express from 'express'
 import apiRouter from './infra/routers/api'
+import cors from 'cors'
 
 const app = express()
 
+app.use(cors({ origin: '*' }))
 app.use('/api', apiRouter)
 
 const port = process.env.PORT || 3333
