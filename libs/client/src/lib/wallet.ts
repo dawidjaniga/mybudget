@@ -8,13 +8,15 @@ export type CreateWalletOptions = {
 }
 
 export default function wallet (apiClient: AxiosInstance) {
+  const url = '/wallets'
+
   return {
     create: async ({
       currency,
       initialBalance
     }: CreateWalletOptions): Promise<Wallet | Error> => {
       try {
-        const response = await apiClient.post<Wallet>('/wallet', {
+        const response = await apiClient.post<Wallet>(url, {
           currency,
           initialBalance
         })
