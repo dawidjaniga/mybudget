@@ -1,6 +1,6 @@
 {
   "name": "mybudget",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "MyBudget API Browser and Node Client",
   "main": "src/index.js",
   "repository": {
@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/dawidjaniga/mybudget/issues"
   },
-  "homepage": "https://github.com/dawidjaniga/mybudget#readme"
+  "homepage": "https://github.com/dawidjaniga/mybudget#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
 }

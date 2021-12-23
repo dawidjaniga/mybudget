@@ -1,9 +1,9 @@
-import ky from 'ky-universal'
+import axios from 'axios'
 import wallet from './wallet'
 
 export function MyBudget () {
-  const apiClient = ky.create({
-    prefixUrl: process.env.API_URL,
+  const apiClient = axios.create({
+    baseURL: process.env.API_URL,
     headers: {
       'content-type': 'application/json'
     }

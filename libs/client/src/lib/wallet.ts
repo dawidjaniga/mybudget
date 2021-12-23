@@ -1,29 +1,25 @@
 import { CurrencyCode, Money, Wallet } from './types'
 
-import { KyInstance } from 'ky/distribution/types/ky'
+import { AxiosInstance } from 'axios'
 
 export type CreateWalletOptions = {
   currency: CurrencyCode
   initialBalance: Money
 }
 
-export default function wallet (apiClient: KyInstance) {
+export default function wallet (apiClient: AxiosInstance) {
   return {
     create: async ({
       currency,
       initialBalance
     }: CreateWalletOptions): Promise<Wallet | Error> => {
       try {
-        const wallet = await apiClient
-          .post('/wallet', {
-            json: {
-              currency,
-              initialBalance
-            }
-          })
-          .json<Wallet>()
+        const response = await apiClient.post<Wallet>('/wallet', {
+          currency,
+          initialBalance
+        })
 
-        return wallet
+        return response.data
       } catch (e) {
         if (e instanceof Error) {
           return e
