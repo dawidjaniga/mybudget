@@ -2,8 +2,6 @@ import { Router } from 'express'
 import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 import * as yup from 'yup'
 
-import { IncomeCategory } from '@mybudget/types'
-
 /**
  * /api/income-categories
  */
@@ -14,60 +12,31 @@ const router = Router()
  * GET /
  */
 router.get('/', async function incomeCategoriesGetHandler(req, res) {
-  /**
-   * @todo 
-   * Fetch real income categories for the authorized user
-   */
+  const data = await req.repository.getAllIncomeCategories()
 
-  const incomeCategories: IncomeCategory[] = [
-    {
-      id: 'income-category-1-a',
-      name: 'income category 1'
-    },
-    {
-      id: 'income-category-2-b',
-      name: 'income category 2'
-    },
-    {
-      id: 'income-category-3-c',
-      name: 'income category 3'
-    },
-    {
-      id: 'income-category-4-d',
-      name: 'income category 4',
-      parentId: 'income-category-1-a',
-    },
-    {
-      id: 'income-category-5-e',
-      name: 'income category 5',
-      parentId: 'income-category-2-b',
-    },
-  ];
-
-  return res.json({ data: incomeCategories })
+  res.json({ data })
 });
 
 /**
  * Create income category
  * POST /
  */
-const createincomeCategorySchema = yup.object().shape({
+const createIncomeCategorySchema = yup.object().shape({
   parentId: yup.string().optional(),
   name: yup.string().required()
 })
 
 router.post('/', async function incomeCategoriesPostHandler(req, res) {
   try {
-    /** const validPayload = */ await createincomeCategorySchema.validate(req.body)
+    const validPayload = await createIncomeCategorySchema.validate(req.body)
+    const parent = validPayload.parentId ? await req.repository.getIncomeCategoryById(validPayload.parentId) : null
 
-    /**
-     * @todo
-     * Here payload is valid
-     * We can safely create a new income category
-     * based on validPayload value
-     */
+    const data = await req.repository.createIncomeCategory({
+      name: validPayload.name,
+      parentId: parent?.id || undefined
+    })
 
-    return res.status(StatusCodes.ACCEPTED).json({ message: ReasonPhrases.ACCEPTED })
+    return res.status(StatusCodes.ACCEPTED).json({ data })
   } catch (e) {
     if (e instanceof Error) {
       return res.status(StatusCodes.BAD_REQUEST).json({ message: e.message })

@@ -1,7 +1,5 @@
 import { Router } from 'express'
 
-import { Money, UserDashboard } from '@mybudget/types'
-
 /**
  * /api/dashboard
  *
@@ -15,27 +13,9 @@ const router = Router()
  * GET /
  */
 router.get('/', async function walletsGetHandler(req, res) {
-  /**
-   * @todo 
-   * Fetch real dashboard for the authorized user
-   */
+  const data = await req.repository.getUserDashboard();
 
-  const dashboard: UserDashboard = {
-    wallets: [
-      {
-        id: 'wallet-1-a',
-        balance: 500 as Money,
-        currency: 'PLN'
-      },
-      {
-        id: 'wallet-2-b',
-        balance: 1000 as Money,
-        currency: 'USD'
-      },
-    ]
-  }
-
-  return res.json({ data: dashboard })
+  return res.json({ data })
 });
 
 export default router

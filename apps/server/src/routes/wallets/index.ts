@@ -14,7 +14,7 @@ const router = Router()
  * GET /
  */
 router.get('/', async function walletsGetHandler(req, res) {
-  const data = await req.repository.getAllWallets();
+  const data = await req.repository.getAllWallets()
 
   res.json({ data })
 });
@@ -34,12 +34,12 @@ router.post('/', async function walletsPostHandler(req, res) {
   try {
     const validPayload = await createWalletSchema.validate(req.body)
 
-    await req.repository.createWallet({
+    const data = await req.repository.createWallet({
       currency: validPayload.currency as CurrencyCode,
       balance: validPayload.balance as Money
     })
 
-    res.status(StatusCodes.ACCEPTED).json({ message: ReasonPhrases.ACCEPTED })
+    res.status(StatusCodes.ACCEPTED).json({ data })
   } catch (error) {
     if (error instanceof yup.ValidationError) {
       return res.status(StatusCodes.BAD_REQUEST).json({ message: error.message })

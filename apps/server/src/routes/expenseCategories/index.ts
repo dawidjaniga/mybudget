@@ -2,8 +2,6 @@ import { Router } from 'express'
 import { StatusCodes, ReasonPhrases } from 'http-status-codes'
 import * as yup from 'yup'
 
-import { ExpenseCategory } from '@mybudget/types'
-
 /**
  * /api/expense-categories
  */
@@ -14,37 +12,9 @@ const router = Router()
  * GET /
  */
 router.get('/', async function expenseCategoriesGetHandler(req, res) {
-  /**
-   * @todo 
-   * Fetch real expense categories for the authorized user
-   */
+  const data = await req.repository.getAllExpenseCategories()
 
-  const expenseCategories: ExpenseCategory[] = [
-    {
-      id: 'expense-category-1-a',
-      name: 'Expense category 1'
-    },
-    {
-      id: 'expense-category-2-b',
-      name: 'Expense category 2'
-    },
-    {
-      id: 'expense-category-3-c',
-      name: 'Expense category 3'
-    },
-    {
-      id: 'expense-category-4-d',
-      name: 'Expense category 4',
-      parentId: 'expense-category-1-a',
-    },
-    {
-      id: 'expense-category-5-e',
-      name: 'Expense category 5',
-      parentId: 'expense-category-2-b',
-    },
-  ];
-
-  return res.json({ data: expenseCategories })
+  res.json({ data })
 });
 
 /**
@@ -58,16 +28,15 @@ const createExpenseCategorySchema = yup.object().shape({
 
 router.post('/', async function expenseCategoriesPostHandler(req, res) {
   try {
-    /** const validPayload = */ await createExpenseCategorySchema.validate(req.body)
+    const validPayload = await createExpenseCategorySchema.validate(req.body)
+    const parent = validPayload.parentId ? await req.repository.getExpenseCategoryById(validPayload.parentId) : null
 
-    /**
-     * @todo
-     * Here payload is valid
-     * We can safely create a new expense category
-     * based on validPayload value
-     */
+    const data = await req.repository.createExpenseCategory({
+      name: validPayload.name,
+      parentId: parent?.id || undefined
+    })
 
-    return res.status(StatusCodes.ACCEPTED).json({ message: ReasonPhrases.ACCEPTED })
+    return res.status(StatusCodes.ACCEPTED).json({ data })
   } catch (e) {
     if (e instanceof Error) {
       return res.status(StatusCodes.BAD_REQUEST).json({ message: e.message })
