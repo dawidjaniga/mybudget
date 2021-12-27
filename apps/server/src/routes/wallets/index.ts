@@ -27,7 +27,7 @@ const allowedWalletCurrencies: CurrencyCode[] = ['PLN', 'USD', 'EUR', 'GBP', 'CH
 
 const createWalletSchema = yup.object().shape({
   currency: yup.string().oneOf(allowedWalletCurrencies).required(),
-  balance: yup.number().integer().optional().default(0)
+  initialBalance: yup.number().integer().optional().default(0)
 })
 
 router.post('/', async function walletsPostHandler(req, res) {
@@ -36,7 +36,7 @@ router.post('/', async function walletsPostHandler(req, res) {
 
     const data = await req.repository.createWallet({
       currency: validPayload.currency as CurrencyCode,
-      balance: validPayload.balance as Money
+      balance: validPayload.initialBalance as Money
     })
 
     res.status(StatusCodes.ACCEPTED).json({ data })

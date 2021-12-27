@@ -1,3 +1,6 @@
+/**
+ * @todo Use @mybudget/types
+ */
 export type Money = number & {
   __brand: 'money'
 }
