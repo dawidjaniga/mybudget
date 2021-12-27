@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-import wallet from './wallet'
-import income from './income'
-import incomeCategory from './incomeCategory'
-import expense from './expense'
-import expenseCategory from './expenseCategory'
+import wallets from './wallets'
+import incomes from './incomes'
+import incomeCategories from './incomeCategories'
+import expenses from './expenses'
+import expenseCategories from './expenseCategories'
 import dashboard from './dashboard'
 
-export function MyBudget() {
+export function MyBudget () {
   const apiClient = axios.create({
     // baseURL: process.env.API_URL,
     // @TODO: replace with inline process env replacer
@@ -18,11 +18,11 @@ export function MyBudget() {
   })
 
   return {
-    wallet: wallet(apiClient),
-    income: income(apiClient),
-    incomeCategory: incomeCategory(apiClient),
-    expense: expense(apiClient),
-    expenseCategory: expenseCategory(apiClient),
-    dashboard: dashboard(apiClient),
+    wallets: wallets(apiClient),
+    incomes: incomes(apiClient),
+    incomeCategories: incomeCategories(apiClient),
+    expenses: expenses(apiClient),
+    expenseCategories: expenseCategories(apiClient),
+    dashboard: dashboard(apiClient)
   }
 }

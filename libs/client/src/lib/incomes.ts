@@ -2,23 +2,23 @@ import { Income, Money } from './types'
 
 import { AxiosInstance } from 'axios'
 
-export type CreateIncomeOptions = {
+export type AddIncomeOptions = {
   walletId: string
   categoryId: string
   amount: Money
   transactionDate?: Date
 }
 
-export default function income(apiClient: AxiosInstance) {
+export default function incomes (apiClient: AxiosInstance) {
   const url = '/incomes'
 
   return {
-    create: async ({
+    add: async ({
       walletId,
       categoryId,
       amount,
       transactionDate
-    }: CreateIncomeOptions): Promise<Income | Error> => {
+    }: AddIncomeOptions): Promise<Income | Error> => {
       try {
         const response = await apiClient.post<Income>(url, {
           walletId,

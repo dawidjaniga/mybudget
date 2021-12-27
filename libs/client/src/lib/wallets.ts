@@ -7,7 +7,7 @@ export type CreateWalletOptions = {
   initialBalance: Money
 }
 
-export default function wallet (apiClient: AxiosInstance) {
+export default function wallets (apiClient: AxiosInstance) {
   const url = '/wallets'
 
   return {
