@@ -1,6 +1,6 @@
 {
   "name": "mybudget",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "MyBudget API Browser and Node Client",
   "main": "src/index.js",
   "repository": {
