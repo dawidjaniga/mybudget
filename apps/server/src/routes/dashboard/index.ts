@@ -1,5 +1,7 @@
 import { Router } from 'express'
 
+import { errorBoundary } from '../../middlewares';
+
 /**
  * /api/dashboard
  *
@@ -12,10 +14,10 @@ const router = Router()
  * Get dashboard
  * GET /
  */
-router.get('/', async function walletsGetHandler(req, res) {
+router.get('/', errorBoundary(async function getDashboard(req, res) {
   const data = await req.repository.getUserDashboard();
 
   return res.json({ data })
-});
+}));
 
 export default router
