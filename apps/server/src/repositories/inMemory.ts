@@ -1,23 +1,19 @@
 import { Expense, ExpenseCategory, Income, IncomeCategory, Money, UserDashboard, Wallet } from "@mybudget/types";
 import { Repository } from "./types";
 
+interface InMemoryStore {
+  wallets: Wallet[],
+  incomes: Income[],
+  expenses: Expense[],
+  incomeCategories: IncomeCategory[],
+  expenseCategories: ExpenseCategory[]
+}
+
 export class InMemoryRepository implements Repository {
-  private data: {
-    wallets: Wallet[],
-    incomes: Income[],
-    expenses: Expense[],
-    incomeCategories: IncomeCategory[],
-    expenseCategories: ExpenseCategory[]
-  };
+  private data: InMemoryStore;
 
   constructor() {
-    this.data = {
-      wallets: [],
-      incomes: [],
-      expenses: [],
-      incomeCategories: [],
-      expenseCategories: []
-    };
+    this.data = buildInitialInMemoryStore();
   }
 
   async isOK(): Promise<boolean> {
@@ -183,5 +179,65 @@ export class InMemoryRepository implements Repository {
     return {
       wallets: this.data.wallets
     }
+  }
+}
+
+function buildInitialInMemoryStore(): InMemoryStore {
+  return {
+    wallets: [],
+    incomes: [],
+    expenses: [],
+    incomeCategories: [
+      { name: "Salary", id: "0" },
+      { name: "Cheques and coupons", id: "1" },
+      { name: "Child donation", id: "2" },
+      { name: "Gift", id: "3" },
+      { name: "Rental income", id: "4" },
+      { name: "Lottery", id: "5" },
+      { name: "Dividend", id: "6" },
+      { name: "Tax refund", id: "7" }
+    ],
+    expenseCategories: [
+      { name: "Food and drinks", id: "0" },
+      { name: "Restaurans and fast foods", id: "00", parentId: "0" },
+      { name: "Coffee", id: "01", parentId: "0" },
+      { name: "Alcohols", id: "02", parentId: "0" },
+      { name: "Shopping", id: "1" },
+      { name: "Groceries", id: "10", parentId: "1" },
+      { name: "Health and beauty", id: "11", parentId: "1" },
+      { name: "Clothing and footwear", id: "12", parentId: "1" },
+      { name: "House and garden", id: "13", parentId: "1" },
+      { name: "Pharmaceuticals", id: "14", parentId: "1" },
+      { name: "Electronics and accessories", id: "15", parentId: "1" },
+      { name: "Kids", id: "1", parentId: "16" },
+      { name: "Jewelry", id: "1", parentId: "17" },
+      { name: "Pets", id: "1", parentId: "18" },
+      { name: "Building Materials and tools", id: "19", parentId: "1" },
+      { name: "Housing", id: "2" },
+      { name: "Insurance", id: "20", parentId: "2" },
+      { name: "Mortgage", id: "21", parentId: "2" },
+      { name: "Maintenance and repair", id: "22", parentId: "2" },
+      { name: "Services", id: "23", parentId: "2" },
+      { name: "Renting", id: "24", parentId: "2" },
+      { name: "Energy and heating", id: "25", parentId: "2" },
+      { name: "Public transport", id: "3" },
+      { name: "Flight", id: "30", parentId: "3" },
+      { name: "Train", id: "31", parentId: "3" },
+      { name: "Bus", id: "32", parentId: "3" },
+      { name: "Taxi", id: "33", parentId: "3" },
+      { name: "Car", id: "4" },
+      { name: "Fuel", id: "40", parentId: "4" },
+      { name: "Service", id: "41", parentId: "4" },
+      { name: "Parking", id: "42", parentId: "4" },
+      { name: "Insurance", id: "43", parentId: "4" },
+      { name: "Leasing", id: "44", parentId: "4" },
+      { name: "IT & Communication Services", id: "5" },
+      { name: "Internet", id: "50", parentId: "5" },
+      { name: "Applications", id: "51", parentId: "5" },
+      { name: "Games", id: "52", parentId: "5" },
+      { name: "Mobile Services", id: "53", parentId: "5" },
+      { name: "Cloud storage", id: "54", parentId: "5" },
+      { name: "Others", id: "6" },
+    ]
   }
 }
