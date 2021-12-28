@@ -1,8 +1,10 @@
 import { Router } from 'express'
-import { StatusCodes, ReasonPhrases } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import * as yup from 'yup'
 
 import { CurrencyCode, Money } from '@mybudget/types'
+
+import { errorBoundary } from '../../middlewares'
 
 /**
  * /api/wallets
@@ -13,11 +15,11 @@ const router = Router()
  * Get wallets
  * GET /
  */
-router.get('/', async function walletsGetHandler(req, res) {
+router.get('/', errorBoundary(async function getWallets(req, res) {
   const data = await req.repository.getAllWallets()
 
   res.json({ data })
-});
+}));
 
 /**
  * Create wallet
@@ -30,23 +32,15 @@ const createWalletSchema = yup.object().shape({
   initialBalance: yup.number().integer().optional().default(0)
 })
 
-router.post('/', async function walletsPostHandler(req, res) {
-  try {
-    const validPayload = await createWalletSchema.validate(req.body)
+router.post('/', errorBoundary(async function postWallets(req, res) {
+  const validPayload = await createWalletSchema.validate(req.body)
 
-    const data = await req.repository.createWallet({
-      currency: validPayload.currency as CurrencyCode,
-      balance: validPayload.initialBalance as Money
-    })
+  const data = await req.repository.createWallet({
+    currency: validPayload.currency as CurrencyCode,
+    balance: validPayload.initialBalance as Money
+  })
 
-    res.status(StatusCodes.ACCEPTED).json({ data })
-  } catch (error) {
-    if (error instanceof yup.ValidationError) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ message: error.message })
-    }
-
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: ReasonPhrases.INTERNAL_SERVER_ERROR })
-  }
-})
+  res.status(StatusCodes.ACCEPTED).json({ data })
+}))
 
 export default router
