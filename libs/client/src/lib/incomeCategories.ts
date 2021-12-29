@@ -1,4 +1,4 @@
-import { IncomeCategory } from './types'
+import { Data, IncomeCategory } from './types'
 
 import { AxiosInstance } from 'axios'
 
@@ -16,12 +16,12 @@ export default function incomeCategories (apiClient: AxiosInstance) {
       parentid
     }: CreateIncomeCategoryOptions): Promise<IncomeCategory | Error> => {
       try {
-        const response = await apiClient.post<IncomeCategory>(url, {
+        const response = await apiClient.post<Data<IncomeCategory>>(url, {
           name,
           parentid
         })
 
-        return response.data
+        return response.data.data
       } catch (e) {
         if (e instanceof Error) {
           return e
@@ -32,9 +32,9 @@ export default function incomeCategories (apiClient: AxiosInstance) {
     },
     list: async (): Promise<IncomeCategory[] | Error> => {
       try {
-        const response = await apiClient.get<IncomeCategory[]>(url)
+        const response = await apiClient.get<Data<IncomeCategory[]>>(url)
 
-        return response.data
+        return response.data.data
       } catch (e) {
         if (e instanceof Error) {
           return e

@@ -1,4 +1,4 @@
-import { UserDashboard } from './types'
+import { UserDashboard, Data} from './types'
 
 import { AxiosInstance } from 'axios'
 
@@ -8,9 +8,9 @@ export default function dashboard (apiClient: AxiosInstance) {
   return {
     get: async (): Promise<UserDashboard | Error> => {
       try {
-        const response = await apiClient.get<UserDashboard>(url)
+        const response = await apiClient.get<Data<UserDashboard>>(url)
 
-        return response.data
+        return response.data.data
       } catch (e) {
         if (e instanceof Error) {
           return e
