@@ -5,7 +5,7 @@
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "nx build",
-    "client:publish": "cd dist/libs/client && npm publish",
+    "client:publish": "nx build client && cd dist/libs/client && npm publish",
     "test": "nx test"
   },
   "private": true,
