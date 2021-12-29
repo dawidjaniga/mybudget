@@ -1,4 +1,4 @@
-import { Expense, Money } from './types'
+import { Expense, Money, Data } from './types'
 
 import { AxiosInstance } from 'axios'
 
@@ -20,14 +20,14 @@ export default function expenses (apiClient: AxiosInstance) {
       transactionDate
     }: AddExpenseOptions): Promise<Expense | Error> => {
       try {
-        const response = await apiClient.post<Expense>(url, {
+        const response = await apiClient.post<Data<Expense>>(url, {
           walletId,
           categoryId,
           amount,
           transactionDate
         })
 
-        return response.data
+        return response.data.data;
       } catch (e) {
         if (e instanceof Error) {
           return e
@@ -38,9 +38,9 @@ export default function expenses (apiClient: AxiosInstance) {
     },
     list: async (): Promise<Expense[] | Error> => {
       try {
-        const response = await apiClient.get<Expense[]>(url)
+        const response = await apiClient.get<Data<Expense[]>>(url)
 
-        return response.data
+        return response.data.data
       } catch (e) {
         if (e instanceof Error) {
           return e
