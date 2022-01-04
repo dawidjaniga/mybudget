@@ -49,3 +49,7 @@ export type ExpenseCategory = {
 export type UserDashboard = {
   wallets: Wallet[]
 }
+
+export type Data<T> = {
+  data: T;
+}

@@ -1,6 +1,8 @@
 import { Router } from 'express'
-import { StatusCodes, ReasonPhrases } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import * as yup from 'yup'
+
+import { errorBoundary } from '../../middlewares';
 
 /**
  * /api/income-categories
@@ -11,11 +13,11 @@ const router = Router()
  * Get income categories
  * GET /
  */
-router.get('/', async function incomeCategoriesGetHandler(req, res) {
+router.get('/', errorBoundary(async function getIncomeCategories(req, res) {
   const data = await req.repository.getAllIncomeCategories()
 
   res.json({ data })
-});
+}));
 
 /**
  * Create income category
@@ -26,24 +28,16 @@ const createIncomeCategorySchema = yup.object().shape({
   name: yup.string().required()
 })
 
-router.post('/', async function incomeCategoriesPostHandler(req, res) {
-  try {
-    const validPayload = await createIncomeCategorySchema.validate(req.body)
-    const parent = validPayload.parentId ? await req.repository.getIncomeCategoryById(validPayload.parentId) : null
+router.post('/', errorBoundary(async function postIncomeCategories(req, res) {
+  const validPayload = await createIncomeCategorySchema.validate(req.body)
+  const parent = validPayload.parentId ? await req.repository.getIncomeCategoryById(validPayload.parentId) : null
 
-    const data = await req.repository.createIncomeCategory({
-      name: validPayload.name,
-      parentId: parent?.id || undefined
-    })
+  const data = await req.repository.createIncomeCategory({
+    name: validPayload.name,
+    parentId: parent?.id || undefined
+  })
 
-    return res.status(StatusCodes.ACCEPTED).json({ data })
-  } catch (e) {
-    if (e instanceof Error) {
-      return res.status(StatusCodes.BAD_REQUEST).json({ message: e.message })
-    }
-
-    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: ReasonPhrases.INTERNAL_SERVER_ERROR })
-  }
-})
+  return res.status(StatusCodes.ACCEPTED).json({ data })
+}))
 
 export default router
