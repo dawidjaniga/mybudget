@@ -7,7 +7,7 @@ export default function dashboard (apiClient: AxiosInstance) {
   const url = '/dashboard'
 
   return {
-    get: async (): Promise<UserDashboard | Error> => {
+    get: async (): Promise<UserDashboard> => {
       try {
         const response = await apiClient.get<Data<UserDashboard>>(url)
 

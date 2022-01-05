@@ -15,7 +15,7 @@ export default function expenseCategories (apiClient: AxiosInstance) {
     create: async ({
       name,
       parentid
-    }: CreateExpenseCategoryOptions): Promise<ExpenseCategory | Error> => {
+    }: CreateExpenseCategoryOptions): Promise<ExpenseCategory> => {
       try {
         const response = await apiClient.post<Data<ExpenseCategory>>(url, {
           name,
@@ -27,7 +27,7 @@ export default function expenseCategories (apiClient: AxiosInstance) {
         handleError(e)
       }
     },
-    list: async (): Promise<ExpenseCategory[] | Error> => {
+    list: async (): Promise<ExpenseCategory[]> => {
       try {
         const response = await apiClient.get<Data<ExpenseCategory[]>>(url)
 

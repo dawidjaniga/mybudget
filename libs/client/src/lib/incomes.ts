@@ -19,7 +19,7 @@ export default function incomes (apiClient: AxiosInstance) {
       categoryId,
       amount,
       transactionDate
-    }: AddIncomeOptions): Promise<Income | Error> => {
+    }: AddIncomeOptions): Promise<Income> => {
       try {
         const response = await apiClient.post<Data<Income>>(url, {
           walletId,
@@ -33,7 +33,7 @@ export default function incomes (apiClient: AxiosInstance) {
         handleError(e)
       }
     },
-    list: async (): Promise<Income[] | Error> => {
+    list: async (): Promise<Income[]> => {
       try {
         const response = await apiClient.get<Data<Income[]>>(url)
 

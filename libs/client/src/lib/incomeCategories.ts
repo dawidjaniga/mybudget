@@ -15,7 +15,7 @@ export default function incomeCategories (apiClient: AxiosInstance) {
     create: async ({
       name,
       parentid
-    }: CreateIncomeCategoryOptions): Promise<IncomeCategory | Error> => {
+    }: CreateIncomeCategoryOptions): Promise<IncomeCategory> => {
       try {
         const response = await apiClient.post<Data<IncomeCategory>>(url, {
           name,
@@ -27,7 +27,7 @@ export default function incomeCategories (apiClient: AxiosInstance) {
         handleError(e)
       }
     },
-    list: async (): Promise<IncomeCategory[] | Error> => {
+    list: async (): Promise<IncomeCategory[]> => {
       try {
         const response = await apiClient.get<Data<IncomeCategory[]>>(url)
 
