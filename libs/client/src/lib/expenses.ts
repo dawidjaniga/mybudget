@@ -1,6 +1,7 @@
 import { Expense, Money, Data } from './types'
 
 import { AxiosInstance } from 'axios'
+import { handleError } from './errorHandler'
 
 export type AddExpenseOptions = {
   walletId: string
@@ -27,13 +28,9 @@ export default function expenses (apiClient: AxiosInstance) {
           transactionDate
         })
 
-        return response.data.data;
+        return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     },
     list: async (): Promise<Expense[] | Error> => {
@@ -42,11 +39,7 @@ export default function expenses (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     }
   }

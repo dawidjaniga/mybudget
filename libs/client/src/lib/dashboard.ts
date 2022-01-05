@@ -1,6 +1,7 @@
-import { UserDashboard, Data} from './types'
+import { UserDashboard, Data } from './types'
 
 import { AxiosInstance } from 'axios'
+import { handleError } from './errorHandler'
 
 export default function dashboard (apiClient: AxiosInstance) {
   const url = '/dashboard'
@@ -12,11 +13,7 @@ export default function dashboard (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     }
   }

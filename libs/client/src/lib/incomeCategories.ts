@@ -1,6 +1,7 @@
 import { Data, IncomeCategory } from './types'
 
 import { AxiosInstance } from 'axios'
+import { handleError } from './errorHandler'
 
 export type CreateIncomeCategoryOptions = {
   name: string
@@ -23,11 +24,7 @@ export default function incomeCategories (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     },
     list: async (): Promise<IncomeCategory[] | Error> => {
@@ -36,11 +33,7 @@ export default function incomeCategories (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     }
   }

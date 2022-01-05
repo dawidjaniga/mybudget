@@ -1,6 +1,7 @@
 import { Data, Income, Money } from './types'
 
 import { AxiosInstance } from 'axios'
+import { handleError } from './errorHandler'
 
 export type AddIncomeOptions = {
   walletId: string
@@ -29,11 +30,7 @@ export default function incomes (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     },
     list: async (): Promise<Income[] | Error> => {
@@ -42,11 +39,7 @@ export default function incomes (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     }
   }

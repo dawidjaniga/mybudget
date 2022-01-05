@@ -1,6 +1,7 @@
 import { CurrencyCode, Data, Money, Wallet } from './types'
 
 import { AxiosInstance } from 'axios'
+import { handleError } from './errorHandler'
 
 export type CreateWalletOptions = {
   currency: CurrencyCode
@@ -14,7 +15,7 @@ export default function wallets (apiClient: AxiosInstance) {
     create: async ({
       currency,
       initialBalance
-    }: CreateWalletOptions): Promise<Wallet | Error> => {
+    }: CreateWalletOptions): Promise<Wallet> => {
       try {
         const response = await apiClient.post<Data<Wallet>>(url, {
           currency,
@@ -23,24 +24,16 @@ export default function wallets (apiClient: AxiosInstance) {
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     },
-    list: async (): Promise<Wallet[] | Error> => {
+    list: async (): Promise<Wallet[]> => {
       try {
         const response = await apiClient.get<Data<Wallet[]>>(url)
 
         return response.data.data
       } catch (e) {
-        if (e instanceof Error) {
-          return e
-        }
-
-        console.error('Unknown error')
+        handleError(e)
       }
     }
   }

@@ -51,5 +51,11 @@ export type UserDashboard = {
 }
 
 export type Data<T> = {
-  data: T;
+  data: T
+}
+
+export class MyBudgetError extends Error {
+  constructor (message: string) {
+    super(message)
+  }
 }
