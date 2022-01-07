@@ -15,11 +15,14 @@ const router = Router()
  * Get expenses
  * GET /
  */
-router.get('/', errorBoundary(async function getExpenses(req, res) {
-  const data = await req.repository.getAllExpenses()
+router.get(
+  '/',
+  errorBoundary(async function getExpenses (req, res) {
+    const data = await req.repository.getAllExpenses()
 
-  res.json({ data })
-}));
+    res.json({ data })
+  })
+)
 
 /**
  * Create expense
@@ -28,23 +31,34 @@ router.get('/', errorBoundary(async function getExpenses(req, res) {
 const createExpenseSchema = yup.object().shape({
   walletId: yup.string().required(),
   categoryId: yup.string().required(),
-  amount: yup.number().integer().positive().required(),
-  transactionDate: yup.date().optional().default(() => new Date())
+  amount: yup
+    .number()
+    .integer()
+    .positive()
+    .required(),
+  transactionDate: yup
+    .date()
+    .optional()
+    .default(() => new Date())
 })
 
-router.post('/', errorBoundary(async function postExpenses(req, res) {
-  const validPayload = await createExpenseSchema.validate(req.body)
-  const wallet = await req.repository.getWalletById(validPayload.walletId)
-  const category = await req.repository.getExpenseCategoryById(validPayload.categoryId)
+router.post(
+  '/',
+  errorBoundary(async function postExpenses (req, res) {
+    const validPayload = await createExpenseSchema.validate(req.body)
+    const category = await req.repository.getExpenseCategoryById(
+      validPayload.categoryId
+    )
 
-  const data = await req.repository.createExpense({
-    walletId: wallet.id,
-    categoryId: category.id,
-    amount: validPayload.amount as Money,
-    transactionDate: validPayload.transactionDate
+    const data = await req.repository.createExpense({
+      walletId: validPayload.walletId,
+      categoryId: category.id,
+      amount: validPayload.amount as Money,
+      transactionDate: validPayload.transactionDate
+    })
+
+    res.status(StatusCodes.ACCEPTED).json({ data })
   })
-
-  res.status(StatusCodes.ACCEPTED).json({ data })
-}))
+)
 
 export default router

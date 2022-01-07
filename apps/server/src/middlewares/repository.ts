@@ -1,25 +1,29 @@
 import { NextFunction, Response, Request } from 'express'
 
-import { InMemoryRepository } from '../repositories';
+import { MongoRepository } from '../repositories'
 
-let $repository;
+let $repository
 
-function getRepository() {
+function getRepository () {
   if ($repository) {
     return $repository
   }
 
-  $repository = new InMemoryRepository();
+  $repository = new MongoRepository()
 
-  return $repository;
+  return $repository
 }
 
-export function repositoryMiddleware(req: Request, res: Response, next: NextFunction) {
+export function repositoryMiddleware (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   /**
    * @todo
    * Environment configuration of repository
    */
   req.repository = getRepository()
 
-  return next();
+  return next()
 }
