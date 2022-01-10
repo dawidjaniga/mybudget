@@ -9,6 +9,7 @@ import {
 } from '@mybudget/types'
 import { Repository } from './types'
 import { nanoid } from 'nanoid'
+import { ApplicationError } from '../middlewares/error'
 
 const mongoose = require('mongoose')
 
@@ -67,6 +68,14 @@ export class MongoRepository implements Repository {
    * Wallets
    */
   async createWallet (data: Omit<Wallet, 'id'>): Promise<Wallet> {
+    const walletWithTheSameCurrency = await WalletModel.findOne({
+      currency: data.currency
+    })
+
+    if (walletWithTheSameCurrency) {
+      throw new ApplicationError('You can create only 1 wallet per currency')
+    }
+
     const wallet = new WalletModel({
       ...data,
       id: nanoid()
