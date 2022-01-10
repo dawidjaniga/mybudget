@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "MyBudget API Browser and Node Client",
   "main": "src/index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dawidjaniga/mybudget.git"

@@ -1,3 +1,8 @@
+import { CreateWalletOptions } from './wallets'
+import { CreateIncomeCategoryOptions } from './incomeCategories'
+import { CreateExpenseCategoryOptions } from './expenseCategories'
+import { AddIncomeOptions } from './incomes'
+import { AddExpenseOptions } from './expenses'
 /**
  * @todo Use @mybudget/types
  */
@@ -58,4 +63,12 @@ export class MyBudgetError extends Error {
   constructor (message: string) {
     super(message)
   }
+}
+
+export {
+  AddExpenseOptions,
+  AddIncomeOptions,
+  CreateExpenseCategoryOptions,
+  CreateIncomeCategoryOptions,
+  CreateWalletOptions
 }
