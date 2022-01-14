@@ -93,7 +93,7 @@ export class MongoRepository implements Repository {
     const wallet = await WalletModel.find({ id })
 
     if (!wallet) {
-      throw new Error(`Wallet 'id=${id}' does not exist`)
+      throw new ApplicationError(`Wallet 'id=${id}' does not exist`)
     }
 
     return wallet
@@ -106,7 +106,7 @@ export class MongoRepository implements Repository {
     const wallet = await WalletModel.findOne({ id: walletId })
 
     if (!wallet) {
-      throw new Error(`Wallet 'id=${walletId}' does not exist`)
+      throw new ApplicationError(`Wallet 'id=${walletId}' does not exist`)
     }
 
     wallet.balance = (wallet.balance + amount) as Money
@@ -120,7 +120,7 @@ export class MongoRepository implements Repository {
     const wallet = await WalletModel.findOne({ id: walletId })
 
     if (!wallet) {
-      throw new Error(`Wallet 'id=${walletId}' does not exist`)
+      throw new ApplicationError(`Wallet 'id=${walletId}' does not exist`)
     }
 
     wallet.balance = (wallet.balance - amount) as Money
@@ -189,7 +189,7 @@ export class MongoRepository implements Repository {
     )
 
     if (!incomeCategory) {
-      throw new Error(`IncomeCategory 'id=${id}' does not exist`)
+      throw new ApplicationError(`IncomeCategory 'id=${id}' does not exist`)
     }
 
     return incomeCategory
@@ -221,7 +221,7 @@ export class MongoRepository implements Repository {
     )
 
     if (!expenseCategory) {
-      throw new Error(`ExpenseCategory 'id=${id}' does not exist`)
+      throw new ApplicationError(`ExpenseCategory 'id=${id}' does not exist`)
     }
 
     return expenseCategory
